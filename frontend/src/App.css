@@ -1,0 +1,30 @@
+body {
+  font-family: monospace;
+  text-align: center;
+  background-color:coral;
+  font-size: 25px;
+  
+ 
+}
+
+
+li {
+  list-style-type: none;
+  
+  ;
+  
+}
+
+h1 {
+  background-color: tomato;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h2 {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h3 {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
