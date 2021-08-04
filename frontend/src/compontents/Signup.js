@@ -31,7 +31,7 @@ const Signup = ({ setUser, setLoggedIn }) => {
         if (!!data.id) {
           setUser(data);
           setLoggedIn(true);
-          history.push("/games");
+          history.push("/login");
         }
       })
       .catch((error) => console.log("error: ", error));

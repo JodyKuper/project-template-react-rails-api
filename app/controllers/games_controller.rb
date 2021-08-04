@@ -11,8 +11,12 @@ class GamesController < ApplicationController
 
 	def create
 		game = Game.new(game_params)
+		
 			if game.save
-				render json: game, status: :created
+			game.the_tables.create(user_id: params[:user_id])
+	
+				
+				render json: game, include: [:users]
 			else
 				render json: {error: "not valid"}, status: :not_created
 			end
@@ -32,7 +36,10 @@ class GamesController < ApplicationController
 	      end
 
 	def favorite
-		render json: {}
+		games= Game.all
+		byebug
+		
+		render json: all_games
 		
 	end
 	

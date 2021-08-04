@@ -9,10 +9,15 @@ import React from 'react'
 	useEffect(()=>{
 		findMyGames()
 	      }, [])
+
         
 	useEffect(()=>{   
 		// console.log(userData)
 	      })
+
+	useEffect((e)=>{
+		gameSubmit()
+	}, [])   
 	
 	      const findMyGames =()=> {
 	 // { useEffect(() => {
@@ -44,13 +49,13 @@ import React from 'react'
 		}
 
 	const gameSubmit=(e)=>  {
-			e.preventDefault()
+			// e.preventDefault()
 			const postGame= {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({name:game})	
+				body: JSON.stringify({name:game, user_id:userData.id})	
 			
 			}
 			// debugger
