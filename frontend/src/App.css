@@ -2,7 +2,7 @@ body {
   font-family: monospace;
   text-align: center;
   background-color:coral;
-  font-size: 25px;
+  font-size: 40px;
   
  
 }
@@ -28,3 +28,12 @@ h3 {
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.mb-3 {
+  padding-left:  200px;
+  padding-right: 200px;
+}
+
+.mb-4 {
+  padding-left:  300px;
+  padding-right: 300px;
+}

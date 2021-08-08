@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { Nav, Button } from "react-bootstrap"
 import React from 'react'
 
 
@@ -8,7 +9,7 @@ const Header = ({ loggedIn, handleLogout }) => {
 	if (loggedIn) {
 	return (
 		<header>
-		 <button onClick={handleLogout}>Logout</button>
+		 <Button onClick={handleLogout}>Logout</Button>
     		  </header>
     )
  	 } else {

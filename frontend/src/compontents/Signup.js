@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Form, Button } from "react-bootstrap"
 
 const Signup = ({ setUser, setLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -38,29 +39,36 @@ const Signup = ({ setUser, setLoggedIn }) => {
   };
   return (
     <div>
-      <form onSubmit={handleSignup}>
         <h3>Sign up</h3>
-        <input
-          type="text"
-          id="username"
-          placeholder="username"
-          value={username}
-          onChange={handleChange}
-        />
-        <br></br>
-
-        <br></br>
-        <input
-          type="text"
-          id="password"
-          placeholder="password"
-          value={password}
-          onChange={handleChange}
-        />
-        <br></br>
-        <br></br>
-        <button type="submit">Submit</button>
-      </form>
+        <Form onSubmit={handleSignup}>
+				<Form.Group className='mb-3'controlId='formBasicUsername'>
+					
+      				<Form.Control
+				        size=""
+        				type="text"
+					id="username"
+        				placeholder="username"
+					value={username}
+        				onChange={handleChange}
+        				
+      				/>
+				   </Form.Group>   
+				      <br></br>
+      				
+				      
+				      <Form.Group className='mb-3'controlId='formBasicUsername'>      
+				<Form.Control
+					size=""
+					type="text"
+					id="password"
+					placeholder="password"
+					value={password}
+					onChange={handleChange}
+					/>
+					</Form.Group>
+					
+				<Button type="submit">Submit</Button>
+    			</Form>
     </div>
   );
 };

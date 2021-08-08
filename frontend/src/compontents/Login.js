@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useHistory} from "react-router-dom"
+import { Form, Button } from "react-bootstrap"
 import React from 'react'
 
 const Login = ({setUser, setLoggedIn}) => {
@@ -29,10 +30,14 @@ const Login = ({setUser, setLoggedIn}) => {
 		fetch("/login", loginObj)
 		.then ((res)=> res.json())
 		.then((data) => {
+			console.log(data)
 			if (!!data.id) {
 				setUser(data)
 				setLoggedIn(true)
 				history.push("/games")
+				
+			}else {
+				alert(data["error"])
 			}
 		})
 
@@ -40,27 +45,36 @@ const Login = ({setUser, setLoggedIn}) => {
 	return (
 		<div>
 							
-			<form onSubmit={handleSubmit}>
       				<h3>Login With Username and Password</h3>
-      				<input
+			<Form onSubmit={handleSubmit}>
+				<Form.Group className='mb-3'controlId='formBasicUsername'>
+					
+      				<Form.Control
+				        size=""
         				type="text"
 					id="username"
         				placeholder="username"
 					value={username}
         				onChange={handleChange}
         				
-      				/><br></br>
-      				
+      				/>
+				   </Form.Group>   
 				      <br></br>
-				<input
+      				
+				      
+				      <Form.Group className='mb-3'controlId='formBasicUsername'>      
+				<Form.Control
+					sixe=""
 					type="text"
 					id="password"
 					placeholder="password"
 					value={password}
 					onChange={handleChange}
-					/><br></br><br></br>
-				<button type="submit">Submit</button>
-    			</form>
+					/>
+					</Form.Group>
+					
+				<Button type="submit">Submit</Button>
+    			</Form>
 			
 		</div>
 	)

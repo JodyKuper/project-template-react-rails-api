@@ -38,7 +38,7 @@ import { useState, useEffect } from "react"
 	 
 	return (
 		<div>
-			Favorite Games
+			<h4>Favorite Games</h4><br></br>
 			{gamesList()}
 		</div>
 	)

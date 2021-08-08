@@ -17,7 +17,7 @@ n4 = User.create(username: "Eli",password: "123")
 
 
 g1 = Game.create(name: "Cataan")
-g2 = Game.create(name: "Slendor")
+g2 = Game.create(name: "Splendor")
 g3 = Game.create(name: "GloomHaven")
 g4 = Game.create(name: "Ticket to Ride")
 

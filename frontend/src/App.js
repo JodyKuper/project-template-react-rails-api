@@ -52,7 +52,7 @@ import "./App.css"
     return (
     <div>
       <Header loggedIn={loggedIn} handleLogout={handleLogout} />
-      <h1>BOARDGAME FANATICS</h1>
+      <h1>BOARD GAME FANATICS</h1>
       <Switch>
         <Route exact path="/">
           <Home/>

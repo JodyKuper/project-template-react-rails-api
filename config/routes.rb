@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :the_tables
+  # resources :the_tables
   resources :games
   resources :users, except: [:create]
   get "/favorite", to: "games#favorite"

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Form, Button } from "react-bootstrap"
 import React from 'react'
 
  const Games = ({user}) => {
@@ -75,17 +76,19 @@ import React from 'react'
 	return (
 		<div>
 			{userData.username}<br></br>
-			<h3>GAMES</h3>
-			{gameList()}<br></br>
 			<br></br>
-			<form onSubmit={gameSubmit}>
-				<input 
+			<h3>GAMES</h3>
+			{gameList()}
+			<h4>Add New Games</h4>
+			<Form onSubmit={gameSubmit} className="mb-4">
+				<Form.Control 
 				type="text" 
 				onChange={handleChange}
 				value={game}
 				placeholder="game"/>
-				<input type="submit"></input>
-			</form>
+			
+				<Button type="submit">Submit</Button>
+			</Form>
 
 
 
