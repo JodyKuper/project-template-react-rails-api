@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
 	def index 
 		users=User.all
 		render json: users
@@ -16,10 +15,11 @@ class UsersController < ApplicationController
 			if user.save
 				render json: user, status: :created
 			else
-				render json: {error: "not valid"}, status: :not_created
+				render json: { error: "Invaid Username or Password" }, status: :unauthorized		
 			end
-
 	end
+
+
 
 	def update
 		user = User.find_by(id: params[:id])
@@ -38,5 +38,4 @@ class UsersController < ApplicationController
 	      def user_params
 		      params.permit(:username, :password)
 	      end
-      
 end

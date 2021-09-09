@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  # resources :the_tables
+  
+  get "/games/search", to: "games#findgame"
   resources :games
-  resources :users, except: [:create]
+  resources :users
   get "/favorite", to: "games#favorite"
   post '/signup', to: "users#create"
   post "/login", to: "sessions#create"

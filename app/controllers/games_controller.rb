@@ -1,4 +1,6 @@
-class GamesController < ApplicationController
+# require "httparty"
+class  GamesController < ApplicationController
+
 	def index
 		games = Game.all
 		render json: games
@@ -11,22 +13,23 @@ class GamesController < ApplicationController
 
 	def create
 		game = Game.new(game_params)
-		
-			if game.save
-			game.the_tables.create(user_id: params[:user_id])
-	
-				
-				render json: game, include: [:users]
-			else
-				render json: {error: "not valid"}, status: :not_created
+		if game.save		
+		render json: game, include: [:users]
+		else
+	        	render json: {error: "not a game"}, status: :unauthorized
 			end
 
 	end
 
 	def update
 		game = Game.find_by(id: params[:id])
-		game.update(game_params)
-		render json: game
+		if game && game.user.id == session[:user_id]
+		 if game.update(game_params)
+			render json: game
+		 else 
+	  	render json: {error: game.errors.full_messsages.to_sentence}, status: :unprocessable_entity
+		 end
+		end
 	end
 	
 	def destroy
@@ -36,17 +39,24 @@ class GamesController < ApplicationController
 	      end
 
 	def favorite
-		games= Game.all
-		byebug
+		games = Game.order(rating: :desc)
 		
-		render json: all_games
+		render json: games
+		
+	end
+	def findgame
+   
+   		response = HTTParty.get("https://api.boardgameatlas.com/api/search?name=Splendor&client_id=aMBScZbBDn")
+		
+			render json: response.body 
 		
 	end
 	
       private
 
 	def game_params
-		params.permit(:name)
+		params.permit(:name, :rating, :user_id)
 	end
+
 
 end

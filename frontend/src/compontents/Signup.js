@@ -32,10 +32,13 @@ const Signup = ({ setUser, setLoggedIn }) => {
         if (!!data.id) {
           setUser(data);
           setLoggedIn(true);
-          history.push("/login");
+          history.push("/");
+        }else {
+          // debugger
+          alert(data["error"])
         }
       })
-      .catch((error) => console.log("error: ", error));
+      // .catch((error) => console.log("error: ", error));
   };
   return (
     <div>
@@ -72,4 +75,4 @@ const Signup = ({ setUser, setLoggedIn }) => {
     </div>
   );
 };
-export default Signup;
+export default Signup

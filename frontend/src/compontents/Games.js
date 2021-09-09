@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import React from 'react'
+import { Link } from "react-router-dom"
+
 
  const Games = ({user}) => {
 	 const[userData, setUserData]= useState([])
-	//  const[newGame, setNewGame]= useState()
-	 const[game, setGame]= useState()
+	 const[newGame, setNewGame]= useState([])
+	 const[games, setGames]= useState([])
 
 	useEffect(()=>{
 		findMyGames()
 	      }, [])
 
         
-	useEffect(()=>{   
-		// console.log(userData)
-	      })
-
-	useEffect((e)=>{
+	useEffect(()=>{
 		gameSubmit()
 	}, [])   
 	
 	      const findMyGames =()=> {
-	 // { useEffect(() => {
 		 fetch("/me")
 		 .then((res)=> res.json())
 		 .then((data)=> {
@@ -36,8 +33,8 @@ import React from 'react'
 	
 	 const gameList=()=>{
 		 if (!!userData.games) {    
-		const list=userData.games.map(games=>{
-		    return  <li>{games.name}<br></br></li>
+		const list=userData.games.map(game=>{
+		    return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link></h4>
 		})
 		      return <ul>{list}</ul>
 		}
@@ -46,17 +43,17 @@ import React from 'react'
 	const handleChange=(e)=> {
 		// debugger
 
-			setGame(e.target.value)
+		setGames(e.target.value)
 		}
 
 	const gameSubmit=(e)=>  {
-			// e.preventDefault()
-			const postGame= {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
+		// e.preventDefault()
+		const postGame= {
+			method: "POST",
+			headers: {
+			"Content-Type": "application/json",
 				},
-				body: JSON.stringify({name:game, user_id:userData.id})	
+			body: JSON.stringify({name:games, user_id:userData.id})	
 			
 			}
 			// debugger
@@ -64,18 +61,20 @@ import React from 'react'
 			.then ((res)=> res.json())
 			.then((data) => {
 				console.log(data)
-				// setNewGame(data)	
+				setNewGame(data)
+				setUserData(data)	
 				})
 			
 	
-		}	
+		}
+		console.log(newGame)	
 
 
 	
 
 	return (
 		<div>
-			{userData.username}<br></br>
+			<h3>{userData.username}<br></br></h3>
 			<br></br>
 			<h3>GAMES</h3>
 			{gameList()}
@@ -84,10 +83,11 @@ import React from 'react'
 				<Form.Control 
 				type="text" 
 				onChange={handleChange}
-				value={game}
+				value={games}
 				placeholder="game"/>
-			
-				<Button type="submit">Submit</Button>
+				<Button type="submit">Submit</Button><br></br>
+				<Link to= "/">home</Link>
+
 			</Form>
 
 
