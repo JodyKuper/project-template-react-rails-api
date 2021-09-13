@@ -4,9 +4,9 @@ import React from 'react'
 import { Link } from "react-router-dom"
 
 
- const Games = ({user}) => {
-	 const[userData, setUserData]= useState({})
-	 const[games, setGames]= useState([])
+ const Games = () => {
+	 const[userData, setUserData]= useState([])
+	 const[game, setGame]= useState()
 
 	useEffect(()=>{
 		findMyGames()
@@ -27,9 +27,9 @@ import { Link } from "react-router-dom"
 	 }
 	
 	const handleChange=(e)=> {
-		// debugger
+		console.log(e.target.value)
 
-		setGames(e.target.value)
+		setGame(e.target.value)
 		}
 
 	// function handleChange(event) {
@@ -46,25 +46,26 @@ import { Link } from "react-router-dom"
 			headers: {
 			"Content-Type": "application/json",
 				},
-			body: JSON.stringify({name:games, user_id:userData.id})	
+			body: JSON.stringify({name:game, user_id:userData.id})	
 			}
 			// debugger
 	
 			fetch("/games", postGame)
 			.then ((res)=> res.json())
 			.then((data) => {
+				// debugger
 				if (!!data.id){	
 				console.log(data)
-				addUserData(data)
+				setUserData([...userData,data])
 				}else{
 					alert(data["error"])
 				}	
 					
 			})
 
-			const addUserData = (userData) => {
-				setGames(prevUserData=>[...prevUserData,userData])
-			}
+			// const addUserData = (userData) => {
+			// 	setGame(prevUserData=>[...prevUserData,userData])
+			// }
 		
 			
 	
@@ -80,8 +81,8 @@ import { Link } from "react-router-dom"
        
 
 
-		console.log(userData)
-		// console.log(games)
+		// console.log(userData)
+		// console.log(game)
 
 	return (
 		
@@ -95,7 +96,7 @@ import { Link } from "react-router-dom"
 				<Form.Control 
 				type="text" 
 				onChange={handleChange}
-				value={games}
+				value={game}
 				placeholder="game"/>
 				<Button type="submit">Submit</Button><br></br>
 				<Link to= "/">home</Link>
