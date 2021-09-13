@@ -76,9 +76,9 @@ import "./App.css"
         <Route exact path='/login'>
           <Login setLoggedIn={setLoggedIn} setUser={setUser} />
         </Route>
-        <Route  path='games/:id'>
-           {/* <SearchedGame/>  */}
-           {"Hello"}
+        <Route  path="/games/:id">
+           <SearchedGame/> 
+           
           </Route>
 
            

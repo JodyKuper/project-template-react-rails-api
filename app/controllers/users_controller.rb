@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 			if user.save
 				render json: user, status: :created
 			else
-				render json: { error: "Invaid Username or Password" }, status: :unauthorized		
+				render json: { error: "Username taken" }, status: :unauthorized		
 			end
 	end
 

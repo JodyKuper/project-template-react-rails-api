@@ -5,19 +5,14 @@ import { Link } from "react-router-dom"
 
 
  const Games = ({user}) => {
-	 const[userData, setUserData]= useState([])
-	 const[newGame, setNewGame]= useState([])
+	 const[userData, setUserData]= useState({})
 	 const[games, setGames]= useState([])
 
 	useEffect(()=>{
 		findMyGames()
 	      }, [])
 
-        
-	useEffect(()=>{
-		gameSubmit()
-	}, [])   
-	
+       
 	      const findMyGames =()=> {
 		 fetch("/me")
 		 .then((res)=> res.json())
@@ -31,50 +26,67 @@ import { Link } from "react-router-dom"
 		
 	 }
 	
-	 const gameList=()=>{
-		 if (!!userData.games) {    
-		const list=userData.games.map(game=>{
-		    return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link></h4>
-		})
-		      return <ul>{list}</ul>
-		}
-	}
-
 	const handleChange=(e)=> {
 		// debugger
 
 		setGames(e.target.value)
 		}
 
-	const gameSubmit=(e)=>  {
-		// e.preventDefault()
+	// function handleChange(event) {
+	// 	setUserData({
+	// 	  ...userData,
+	// 	  [event.target.name]: event.target.value,
+	// 	});
+	//       }
+
+	const gameSubmit = (e) => {
+		e.preventDefault()
 		const postGame= {
 			method: "POST",
 			headers: {
 			"Content-Type": "application/json",
 				},
 			body: JSON.stringify({name:games, user_id:userData.id})	
-			
 			}
 			// debugger
+	
 			fetch("/games", postGame)
 			.then ((res)=> res.json())
 			.then((data) => {
+				if (!!data.id){	
 				console.log(data)
-				setNewGame(data)
-				setUserData(data)	
-				})
+				addUserData(data)
+				}else{
+					alert(data["error"])
+				}	
+					
+			})
+
+			const addUserData = (userData) => {
+				setGames(prevUserData=>[...prevUserData,userData])
+			}
+		
 			
 	
 		}
-		console.log(newGame)	
+		const gameList=()=>{
+			if (!!userData.games) {    
+		       const list=userData.games.map(game=>{
+			   return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link>{game.rating}</h4>
+		       })
+			     return <ul>{list}</ul>
+		       }
+	       }
+       
 
 
-	
+		console.log(userData)
+		// console.log(games)
 
 	return (
+		
 		<div>
-			<h3>{userData.username}<br></br></h3>
+			<h3>{userData.username}'s GAME LIBRARY<br></br></h3>
 			<br></br>
 			<h3>GAMES</h3>
 			{gameList()}
