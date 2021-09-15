@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Switch, Route, Redirect, useHistory } from "react-router-dom"
 import Games from "./compontents/Games"
 import SearchedGame from "./compontents/SearchedGame"
+import List from "./compontents/List"
 import Header from "./compontents/Header"
 import Home from "./compontents/Home"
 import Signup from "./compontents/Signup"
@@ -12,26 +13,12 @@ import "./App.css"
  const App = () => {
   const [user, setUser]=useState({})
   const [loggedIn, setLoggedIn]= useState(false)
-  const [searchGame, setSearchGame]= useState([])
   let history =useHistory()
 
   useEffect(()=>{
     findMe()
   },[])
 
-  // useEffect(()=>{
-  //   console.log(user, loggedIn)
-  // })
-//  useEffect(()=>{
-//    fetch("https://api.boardgameatlas.com/api/search?name=Splendor&client_id=aMBScZbBDn")
-//    .then((res)=> res.json())
-//    .then((data)=>{
-    
-//     //  console.log(data)
-//      setSearchGame(data.games[0])
-//    })
-
-//  },[])
  
   const findMe=()=> {
     fetch("/me")
@@ -57,7 +44,7 @@ import "./App.css"
        
         setLoggedIn(false)
         setUser({})
-        history.push("/")
+        history.push("/home")
       })
   }
   // console.log(searchGame)
@@ -67,7 +54,7 @@ import "./App.css"
       <Header loggedIn={loggedIn} handleLogout={handleLogout} />
       <h1>BOARD GAME FANATICS</h1>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/home">
           <Home/>
         </Route>
         <Route exact path='/signup'>
@@ -77,9 +64,11 @@ import "./App.css"
           <Login setLoggedIn={setLoggedIn} setUser={setUser} />
         </Route>
         <Route  path="/games/:id">
-           <SearchedGame/> 
-           
-          </Route>
+           <SearchedGame/>   
+        </Route>
+        <Route  path="/home/:id">
+          <List/> 
+        </Route>
 
            
           <Route exact path='/games'>

@@ -32,7 +32,7 @@ import { Link } from "react-router-dom"
 	const gamesList=()=> {
 		// debugger
 		const list=games.map(game=>{
-			return  <h4><Link to= {`/games/${game.id}`}>{game.name}<br></br></Link></h4>
+			return  <h4><Link to= {`home/${game.id}`}>{game.name}<br></br></Link></h4>
 		
 	
 		    })
@@ -44,8 +44,9 @@ import { Link } from "react-router-dom"
 	 
 	return (
 		<div>
-			<Link to= '/games'>my games</Link>
-			<h3>Favorite Games</h3><br></br>
+			
+			<Link to= '/games'>my game libary</Link>
+			<h3>Fanactics Games</h3><br></br>
 			{gamesList()}
 		</div>
 	)

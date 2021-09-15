@@ -4,11 +4,13 @@ import React from 'react'
 import { Link } from "react-router-dom"
 
 
+
  const Games = () => {
 	 const[userData, setUserData]= useState([])
-	 const[game, setGame]= useState()
-
-	useEffect(()=>{
+	 const[formData, setFormData]= useState("")
+	 const [games, setGames]= useState([])
+	
+	 useEffect(()=>{
 		findMyGames()
 	      }, [])
 
@@ -17,27 +19,18 @@ import { Link } from "react-router-dom"
 		 fetch("/me")
 		 .then((res)=> res.json())
 		 .then((data)=> {
-			
-			//  debugger
-			//  console.log(data)
 			setUserData(data)
+			setGames(data.games)
 			 
 		 })
 		
 	 }
 	
-	const handleChange=(e)=> {
-		console.log(e.target.value)
-
-		setGame(e.target.value)
+        const handleChange=(e)=> {
+		setFormData(e.target.value)
 		}
 
-	// function handleChange(event) {
-	// 	setUserData({
-	// 	  ...userData,
-	// 	  [event.target.name]: event.target.value,
-	// 	});
-	//       }
+	
 
 	const gameSubmit = (e) => {
 		e.preventDefault()
@@ -46,34 +39,59 @@ import { Link } from "react-router-dom"
 			headers: {
 			"Content-Type": "application/json",
 				},
-			body: JSON.stringify({name:game, user_id:userData.id})	
+			body: JSON.stringify({name: formData, user_id:userData.id})	
 			}
-			// debugger
-	
 			fetch("/games", postGame)
 			.then ((res)=> res.json())
 			.then((data) => {
+				console.log(data)
 				// debugger
 				if (!!data.id){	
 				console.log(data)
-				setUserData([...userData,data])
+				setGames([...games,data])
 				}else{
 					alert(data["error"])
 				}	
-					
 			})
-
-			// const addUserData = (userData) => {
-			// 	setGame(prevUserData=>[...prevUserData,userData])
-			// }
+			setFormData("")		
 		
 			
 	
-		}
+	}
+
+	const ratingChange=(e) => {
+		console.log(e.target.value)
+	}
+
+	// const handleUpdategames=(updatedGame)=> {
+	// 	setGames((games) =>
+	// 	  games.map((game) => {
+	// 	    return games.id === updatedGame.id ? updatedGame : game;
+	// 	  })
+	// 	);
+	//       }
+	useEffect(()=>{
+		fetch(`/spices/${games.id}`, {
+			method: "PATCH",
+			headers: {
+			  "Content-Type": "application/json",
+			},
+			body: JSON.stringify({ }),
+		      })
+			.then((r) => r.json())
+			.then()
+		
+	      }, [])
+
+       
+
+	
+	    
 		const gameList=()=>{
-			if (!!userData.games) {    
-		       const list=userData.games.map(game=>{
-			   return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link>{game.rating}</h4>
+			if (!!games) {    
+		       const list=games.map(game=>{
+			   return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link><Button onClick={ratingChange}>{game.rating}
+				   </Button></h4>
 		       })
 			     return <ul>{list}</ul>
 		       }
@@ -96,10 +114,10 @@ import { Link } from "react-router-dom"
 				<Form.Control 
 				type="text" 
 				onChange={handleChange}
-				value={game}
+				value={formData}
 				placeholder="game"/>
 				<Button type="submit">Submit</Button><br></br>
-				<Link to= "/">home</Link>
+				<Link to= "/home">home</Link>
 
 			</Form>
 

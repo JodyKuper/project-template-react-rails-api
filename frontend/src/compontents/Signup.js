@@ -32,7 +32,7 @@ const Signup = ({ setUser, setLoggedIn }) => {
         if (!!data.id) {
           setUser(data);
           setLoggedIn(true);
-          history.push("/");
+          history.push("/home");
         }else {
           // debugger
           alert(data["error"])

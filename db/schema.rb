@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_08_09_164521) do
 
   create_table "games", force: :cascade do |t|
     t.string "name"
-    t.integer "rating"
+    t.integer "rating", default: 0, null: false
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

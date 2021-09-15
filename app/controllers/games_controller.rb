@@ -9,7 +9,7 @@ class  GamesController < ApplicationController
 	def show
 		game = Game.find_by(id: params[:id])
 		response = HTTParty.get("https://api.boardgameatlas.com/api/search?name=#{game.name}&client_id=aMBScZbBDn")
-		render json:  response.body, only: [:name, :min_players, :max_players, :min_playtime, :max_playtime, :min_age, :discritpion, :image_url, :publisher], include: [:game]
+		render json:  response.body 
 	end
 
 	def create
@@ -45,11 +45,7 @@ class  GamesController < ApplicationController
 		
 	end
 	
-	def findgame
-   		response = HTTParty.get("https://api.boardgameatlas.com/api/search?name=Splendor&client_id=aMBScZbBDn")
-		render json: response.body 
-		
-	end
+	
 	
       private
 

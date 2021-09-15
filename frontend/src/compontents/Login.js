@@ -34,7 +34,7 @@ const Login = ({setUser, setLoggedIn}) => {
 			if (!!data.id) {
 				setUser(data)
 				setLoggedIn(true)
-				history.push("/")
+				history.push("/home")
 				
 			}else {
 				alert(data["error"])

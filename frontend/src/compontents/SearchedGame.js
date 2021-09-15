@@ -6,9 +6,9 @@ import { useParams, useHistory, Link } from "react-router-dom";
 const SearchedGame = () => {
   const [game, setGame] = useState([]);
   let { id } = useParams();
-  const history = useHistory;
+  const history = useHistory();
 
- const historyPush=()=>{}
+ 
 
   useEffect(() => {
     fetch(`/games/${id}`)
@@ -21,13 +21,15 @@ const SearchedGame = () => {
             header: {
               Accepts: "application/json",
             },
+	    
           });
-          
+	  history.push("/games")          
         } else {
           setGame(data.games[0]);
         }
       });
   }, []);
+
   const handleDelete = () => {
     fetch(`/games/${id}`, {
       method: "DELETE",
@@ -35,11 +37,7 @@ const SearchedGame = () => {
         Accepts: "application/json",
       },
     });
-    //   .then((res)=> res.json())
-    //   .then((data) => {
-    // 	setGame(data)
-    // 	history.push("/games")
-    //   })
+  
   };
 
   return (
