@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import React from 'react'
 import { Link } from "react-router-dom"
-
+import GameCard from "./GameCard"
 
 
  const Games = () => {
 	 const[userData, setUserData]= useState([])
 	 const[formData, setFormData]= useState("")
 	 const [games, setGames]= useState([])
+	
 	
 	 useEffect(()=>{
 		findMyGames()
@@ -59,9 +60,7 @@ import { Link } from "react-router-dom"
 	
 	}
 
-	const ratingChange=(e) => {
-		console.log(e.target.value)
-	}
+	
 
 	// const handleUpdategames=(updatedGame)=> {
 	// 	setGames((games) =>
@@ -70,32 +69,39 @@ import { Link } from "react-router-dom"
 	// 	  })
 	// 	);
 	//       }
-	useEffect(()=>{
-		fetch(`/spices/${games.id}`, {
-			method: "PATCH",
-			headers: {
-			  "Content-Type": "application/json",
-			},
-			body: JSON.stringify({ }),
-		      })
-			.then((r) => r.json())
-			.then()
+	// useEffect(()=>{
+	// 	fetch(`/games/${games.id}`, {
+	// 		method: "PATCH",
+	// 		headers: {
+	// 		  "Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify({rating }),
+	// 	      })
+	// 		.then((r) => r.json())
+	// 		.then()
 		
-	      }, [])
+	//       }, [])
 
        
-
+	      const gameList = games.map((game) => {
+		return (
+			<GameCard
+				key={game.id}
+				game={game}
+			/>
+		)
+	})
 	
 	    
-		const gameList=()=>{
-			if (!!games) {    
-		       const list=games.map(game=>{
-			   return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link><Button onClick={ratingChange}>{game.rating}
-				   </Button></h4>
-		       })
-			     return <ul>{list}</ul>
-		       }
-	       }
+	// 	const gameList=()=>{
+	// 		if (!!games) {    
+	// 	       const list=games.map(game=>{
+	// 		   return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link><Button onClick={ratingChange}>{game.rating}
+	// 			   </Button></h4>
+	// 	       })
+	// 		     return <ul>{list}</ul>
+	// 	       }
+	//        }
        
 
 
@@ -108,7 +114,10 @@ import { Link } from "react-router-dom"
 			<h3>{userData.username}'s GAME LIBRARY<br></br></h3>
 			<br></br>
 			<h3>GAMES</h3>
-			{gameList()}
+			{/* {gameList()} */}
+			{gameList}
+			
+			    
 			<h4>Add New Games</h4>
 			<Form onSubmit={gameSubmit} className="mb-4">
 				<Form.Control 

@@ -9,7 +9,9 @@ class  GamesController < ApplicationController
 	def show
 		game = Game.find_by(id: params[:id])
 		response = HTTParty.get("https://api.boardgameatlas.com/api/search?name=#{game.name}&client_id=aMBScZbBDn")
-		render json:  response.body 
+		render json:  response.body
+	
+		
 	end
 
 	def create
@@ -23,14 +25,13 @@ class  GamesController < ApplicationController
 	end
 
 	def update
+		
 		game = Game.find_by(id: params[:id])
-		if game && game.user.id == session[:user_id]
-		 if game.update(game_params)
-			render json: game
-		 else 
-	  	render json: {error: game.errors.full_messsages.to_sentence}, status: :unprocessable_entity
-		 end
-		end
+		game.update(game_params)
+		render json: game
+		
+		
+		
 	end
 	
 	def destroy
