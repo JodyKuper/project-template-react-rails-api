@@ -62,25 +62,6 @@ import GameCard from "./GameCard"
 
 	
 
-	// const handleUpdategames=(updatedGame)=> {
-	// 	setGames((games) =>
-	// 	  games.map((game) => {
-	// 	    return games.id === updatedGame.id ? updatedGame : game;
-	// 	  })
-	// 	);
-	//       }
-	// useEffect(()=>{
-	// 	fetch(`/games/${games.id}`, {
-	// 		method: "PATCH",
-	// 		headers: {
-	// 		  "Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify({rating }),
-	// 	      })
-	// 		.then((r) => r.json())
-	// 		.then()
-		
-	//       }, [])
 
        
 	      const gameList = games.map((game) => {
@@ -93,31 +74,14 @@ import GameCard from "./GameCard"
 	})
 	
 	    
-	// 	const gameList=()=>{
-	// 		if (!!games) {    
-	// 	       const list=games.map(game=>{
-	// 		   return  <h4><Link to={`/games/${game.id}`}>{game.name}<br></br></Link><Button onClick={ratingChange}>{game.rating}
-	// 			   </Button></h4>
-	// 	       })
-	// 		     return <ul>{list}</ul>
-	// 	       }
-	//        }
-       
-
-
-		// console.log(userData)
-		// console.log(game)
-
+	
 	return (
 		
 		<div>
 			<h3>{userData.username}'s GAME LIBRARY<br></br></h3>
 			<br></br>
 			<h3>GAMES</h3>
-			{/* {gameList()} */}
-			{gameList}
-			
-			    
+			{gameList}   
 			<h4>Add New Games</h4>
 			<Form onSubmit={gameSubmit} className="mb-4">
 				<Form.Control 
@@ -126,7 +90,7 @@ import GameCard from "./GameCard"
 				value={formData}
 				placeholder="game"/>
 				<Button type="submit">Submit</Button><br></br>
-				<Link to= "/home">home</Link>
+				<Link to= "/">home</Link>
 
 			</Form>
 

@@ -36,7 +36,7 @@ import { useParams, Link } from "react-router-dom";
       </h4>
       <Markup content={game.description} />
       <h4>publisher: {game.publisher}</h4><br></br>
-      <Link to= "/home">Home</Link>		
+      <Link to= "/">Home</Link>		
 		</div>
 	)
 }

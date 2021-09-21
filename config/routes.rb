@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   get "/games/search", to: "games#findgame"
   resources :games
-  resources :users
+  resources :users, except: :update
   get "/favorite", to: "games#favorite"
   post '/signup', to: "users#create"
   post "/login", to: "sessions#create"

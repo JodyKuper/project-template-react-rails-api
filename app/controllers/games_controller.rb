@@ -7,8 +7,10 @@ class  GamesController < ApplicationController
 	end
 
 	def show
+	
+		
 		game = Game.find_by(id: params[:id])
-		response = HTTParty.get("https://api.boardgameatlas.com/api/search?name=#{game.name}&client_id=aMBScZbBDn")
+		response = HTTParty.get("https://api.boardgameatlas.com/api/search?name=#{game.name}&client_id=#{ENV["boardgame_api_key"]}")
 		render json:  response.body
 	
 		
@@ -27,8 +29,14 @@ class  GamesController < ApplicationController
 	def update
 		
 		game = Game.find_by(id: params[:id])
+		if game
 		game.update(game_params)
 		render json: game
+		else
+			render json: {error: "not a rating"}, status: :unauthorized
+		end
+
+
 		
 		
 		

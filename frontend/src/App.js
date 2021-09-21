@@ -44,7 +44,7 @@ import "./App.css"
        
         setLoggedIn(false)
         setUser({})
-        history.push("/home")
+        history.push("/")
       })
   }
   // console.log(searchGame)
@@ -54,7 +54,7 @@ import "./App.css"
       <Header loggedIn={loggedIn} handleLogout={handleLogout} />
       <h1>BOARD GAME FANATICS</h1>
       <Switch>
-        <Route exact path="/home">
+        <Route exact path="/">
           <Home/>
         </Route>
         <Route exact path='/signup'>

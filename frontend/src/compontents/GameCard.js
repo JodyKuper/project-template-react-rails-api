@@ -1,29 +1,26 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import { Link } from "react-router-dom"
 import {  Button } from "react-bootstrap"
 
  const GameCard = (game) => {
-	//  console.log(game)
 	 const [toggleForm, setToggleForm]=useState(false)
 	 const [form, setForm]=useState({
-		 rating: 0
+		 rating: " "
 	 })
-	 console.log(form)
 
 const handleToggleForm=()=>{
 	setToggleForm(mUv=> !mUv)
-
 }
 	
 const handleInput=(e)=>{
 		setForm({
 			[e.target.name]: e.target.value
 		})
-
 	}
 
 	
-	function handleSubmit(e) {	
+	function handleSubmit(e) {
+			
 		fetch(`/games/${game.game.id}`, {
 		method: "PATCH"	,
 		headers: {
@@ -33,9 +30,12 @@ const handleInput=(e)=>{
 		})
 		.then((r) => r.json())
 		.then ((data)=>{
+			if (!!data.rating){
 			
-			// setForm(...form.rating, data)
-
+			setForm( data)
+			}else {
+				alert(data["error"])
+			}
 		})
 	}
 
@@ -43,7 +43,7 @@ const handleInput=(e)=>{
 
 	return (
 		<div>
-		<Link to= {`/games/${game.game.id}`}>{game.game.name}</Link>
+		<h3><Link to= {`/games/${game.game.id}`}>{game.game.name}</Link></h3>
 		<h3>{game.game.rating}</h3>
 		<Button onClick={handleToggleForm}>rate 1-10</Button>
 		{toggleForm ? (
@@ -55,4 +55,4 @@ const handleInput=(e)=>{
 		</div>
 	)
 }
-export default GameCard;
+export default GameCard
