@@ -2,7 +2,7 @@
 
 ## To start Board Game Fanatics
 
-From this folder (Phase-4-Project-PC-Gamefinder), enter 'rails s' from the terminal window to start the server. Then,
+From this folder (project-template-react-rails-api), enter 'rails s' from the terminal window to start the server. Then,
 enter npm start --prefix frontend to start the frontend server. 
 
 ## Description
