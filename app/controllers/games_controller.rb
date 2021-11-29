@@ -2,8 +2,14 @@
 class  GamesController < ApplicationController
 
 	def index
+		
 		games = Game.all
 		render json: games
+	end
+
+	def favoriteGame 
+		favorite=Game.order(rating: :desc).first
+		render json: favorite
 	end
 
 	def show

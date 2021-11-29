@@ -14,9 +14,6 @@ const Login = ({setUser, setLoggedIn}) => {
 		if (e.target.id==="password") setPassword(e.target.value)
 	} 
 
-	
-	
-
 	const handleSubmit=(e)=>  {
 		e.preventDefault()
 		const loginObj= {
@@ -25,7 +22,6 @@ const Login = ({setUser, setLoggedIn}) => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({username, password}),	
-		
 		}
 		fetch("/login", loginObj)
 		.then ((res)=> res.json())

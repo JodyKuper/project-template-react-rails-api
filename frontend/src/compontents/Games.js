@@ -10,13 +10,11 @@ import GameCard from "./GameCard"
 	 const[formData, setFormData]= useState("")
 	 const [games, setGames]= useState([])
 	
-	
 	 useEffect(()=>{
 		findMyGames()
 	      }, [])
 
-       
-	      const findMyGames =()=> {
+	     const findMyGames =()=> {
 		 fetch("/me")
 		 .then((res)=> res.json())
 		 .then((data)=> {
@@ -24,14 +22,11 @@ import GameCard from "./GameCard"
 			setGames(data.games)
 			 
 		 })
-		
 	 }
 	
         const handleChange=(e)=> {
 		setFormData(e.target.value)
 		}
-
-	
 
 	const gameSubmit = (e) => {
 		e.preventDefault()
@@ -54,17 +49,11 @@ import GameCard from "./GameCard"
 					alert(data["error"])
 				}	
 			})
-			setFormData("")		
-		
+		setFormData("")		
 			
-	
 	}
-
-	
-
-
-       
-	      const gameList = games.map((game) => {
+ 
+	  const gameList = games.map((game) => {
 		return (
 			<GameCard
 				key={game.id}
@@ -72,12 +61,10 @@ import GameCard from "./GameCard"
 			/>
 		)
 	})
-	
-	    
-	
+       
 	return (
-		
 		<div>
+
 			<h3>{userData.username}'s GAME LIBRARY<br></br></h3>
 			<br></br>
 			<h3>GAMES</h3>
@@ -91,16 +78,7 @@ import GameCard from "./GameCard"
 				placeholder="game"/>
 				<Button type="submit">Submit</Button><br></br>
 				<Link to= "/">home</Link>
-
 			</Form>
-
-
-
-			
-
-			
-			
-
 			
 		</div>
 	)

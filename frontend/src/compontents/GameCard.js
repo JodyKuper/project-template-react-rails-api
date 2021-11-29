@@ -7,6 +7,7 @@ import {  Button } from "react-bootstrap"
 	 const [form, setForm]=useState({
 		 rating: " "
 	 })
+	 console.log(form)
 
 const handleToggleForm=()=>{
 	setToggleForm(mUv=> !mUv)
@@ -18,7 +19,6 @@ const handleInput=(e)=>{
 		})
 	}
 
-	
 	function handleSubmit(e) {
 			
 		fetch(`/games/${game.game.id}`, {
@@ -38,8 +38,6 @@ const handleInput=(e)=>{
 			}
 		})
 	}
-
-	
 
 	return (
 		<div>

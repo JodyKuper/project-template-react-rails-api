@@ -9,7 +9,6 @@ import Signup from "./compontents/Signup"
 import Login from "./compontents/Login"
 import "./App.css"
 
-
  const App = () => {
   const [user, setUser]=useState({})
   const [loggedIn, setLoggedIn]= useState(false)
@@ -19,7 +18,6 @@ import "./App.css"
     findMe()
   },[])
 
- 
   const findMe=()=> {
     fetch("/me")
     .then((res)=> res.json())
@@ -38,16 +36,14 @@ import "./App.css"
     const delObj= {
       method: "Delete"
     }
-    fetch("/logout", delObj)
-      
+    fetch("/logout", delObj) 
       .then (()=> {
-       
         setLoggedIn(false)
         setUser({})
         history.push("/")
       })
   }
-  // console.log(searchGame)
+  
     return (
       
     <div>
@@ -69,19 +65,15 @@ import "./App.css"
         <Route  path="/home/:id">
           <List/> 
         </Route>
-
-           
           <Route exact path='/games'>
         {loggedIn ? (
             <Games user={user} />
-            
             ) : (
               <Redirect to='/login' />
               )}
               </Route>
       </Switch>
-    </div>
-    
+    </div> 
   )
 }
 export default App

@@ -6,8 +6,7 @@ import { useParams, Link } from "react-router-dom";
  const List = () => {
 	const [game, setGame] = useState([]);
 	let { id } = useParams();
-	
-      
+	  
 	useEffect(() => {
 		fetch(`/games/${id}`)
 		  .then((res) => res.json())
